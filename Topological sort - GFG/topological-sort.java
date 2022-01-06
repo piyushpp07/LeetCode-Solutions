@@ -59,31 +59,42 @@ class Main {
 
 class Solution
 {
-    static void helper(int node , Stack<Integer>st,ArrayList<ArrayList<Integer>>adj,int vis[])
-    {
-        vis[node]=1;
-        for(Integer it: adj.get(node))
-        {
-            if(vis[it]==0)
-            helper(it,st,adj,vis);
-        }
-        st.push(node);
-    }
+
+    
     //Function to return list containing vertices in Topological order. 
     static int[] topoSort(int V, ArrayList<ArrayList<Integer>> adj) 
     {
-        Stack<Integer>st = new Stack<Integer>();
-        int vis[]=new int[V];
+        Queue<Integer>q = new LinkedList<Integer>();
+        int indegree[]=new int[V];
         for(int i=0;i<V;i++)
         {
-            if(vis[i]==0)
-                helper(i,st,adj,vis);
+            for(Integer it : adj.get(i))
+            {
+                indegree[it]++;
+            }
+        }
+        for(int i=0;i<V;i++)
+        {
+            if(indegree[i]==0)
+            {
+                q.add(i);
+            }
         }
         int topo[]=new int[V];
         int idx=0;
-        while(!st.isEmpty()){
-            topo[idx++]=st.pop();
+        while(!q.isEmpty())
+        {
+            int front=q.poll();
+
+            topo[idx++]=front;
+            for(Integer it:adj.get(front))
+            {
+                indegree[it]--;
+                if(indegree[it]==0)
+                   q.add(it);
+            }
         }
         return topo;
+
     }
 }
