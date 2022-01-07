@@ -1,11 +1,8 @@
 class Solution {
 public:
     vector<int>v;
-    Solution(vector<int>& nums) {
-        for(auto i : nums)
-        {
-            v.push_back(i);
-        }
+     Solution(vector<int>& nums) {
+        v=nums;
     }
     
     int pick(int target) {
