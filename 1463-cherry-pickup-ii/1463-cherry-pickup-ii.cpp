@@ -7,8 +7,8 @@ private:
     int ff(vector<vector<int>>& grid, int i, int c1, int c2) {
         int m = grid.size();
         int n = grid[0].size();
-        if (i == m) return 0;
-        if (c1 < 0 || c2 < 0 || c1 >= n || c2 >= n) return INT_MIN;
+      
+        if (i==m || c1 < 0 || c2 < 0 || c1 >= n || c2 >= n) return 0;
         if (dp[i][c1][c2] != -1) return dp[i][c1][c2];
         
         int maxAns = 0;
