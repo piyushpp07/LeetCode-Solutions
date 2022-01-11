@@ -15,13 +15,15 @@ int s=0;
      void sum(TreeNode *root ,int qsum )
     {
         if(root->left==nullptr&&root->right==nullptr)
-        {
          s = s + qsum*2 + root->val ;
-        }
+        
+        int z = qsum*2 + root->val;
+         
         if(root->left!=nullptr)
-            sum(root->left ,qsum*2 + root->val);
+            sum(root->left , z);
+         
         if(root->right!=nullptr)
-            sum(root->right,qsum*2 + root->val);
+            sum(root->right , z);
     }
 public:
     
