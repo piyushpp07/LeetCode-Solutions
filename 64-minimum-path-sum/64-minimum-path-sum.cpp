@@ -4,7 +4,7 @@ private:
     int helper(int i ,int j, int n ,int m ,vector<vector<int>>&arr )
     {
         if(i>n-1||j>m-1)
-            return 0;
+            return INT_MAX;
         
         if(i==n-1&&j==m-1)
             return dp[i][j]= arr[i][j];
