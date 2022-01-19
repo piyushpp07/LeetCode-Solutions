@@ -31,4 +31,6 @@ public class Solution {
         }
         return null;
     }
+    //there is a good reason behind using the slow =head;
+    //https://www.youtube.com/watch?v=-YiQZi3mLq0
 }
