@@ -1,20 +1,18 @@
 class Solution {
-    Boolean []dp=new Boolean[100001];
-    public boolean winnerSquareGame(int n) {
-       if(dp[n]!=null)
-           return dp[n];
-        Boolean aliceWins = false;
-        for(int move = 1; n-move*move>=0;move++)
+public:
+    bool winnerSquareGame(int n) {
+    vector<bool>dp(n+1,false);
+        for(int i=1;i<=n;i++)
         {
-          if(n-move*move==0)
-          {
-              aliceWins=true;
-          }
-          else {
-              aliceWins = aliceWins||!winnerSquareGame(n-move*move);
-          }
+            for(int j=1;j*j<=i;j++)
+            {
+                if(!dp[i-j*j])
+                {
+                     dp[i]=true;
+                    break;
+                }
+            }
         }
-        return dp[n]=aliceWins;
-    
+        return dp[n];
     }
-}
+};
