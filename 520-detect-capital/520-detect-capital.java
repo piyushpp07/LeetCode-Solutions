@@ -12,7 +12,7 @@ class Solution {
                 count++;
             }
         }
-        if(count==n||(first==true&&count==1)||count==0)
+        if(count==n||first==true&&count==1||count==0)
             return true;
         else 
             return false;
