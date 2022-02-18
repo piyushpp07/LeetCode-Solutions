@@ -20,13 +20,8 @@ public class Solution {
         }
         return s;
     }
-    public ListNode getIntersectionNode(ListNode headA, ListNode headB) {
-        ListNode h1 = headA;
-        ListNode h2 = headB;
-        int h1s = size(headA);
-        int h2s = size(headB);
-        if(h1s>h2s)
-        {
+    private ListNode solver(ListNode h1 , ListNode h2,int h1s,int h2s)
+    {
             int del = h1s-h2s;
             while(del>0)
             {
@@ -40,26 +35,24 @@ public class Solution {
                 else{
                     h1 = h1.next;
                     h2 = h2.next;
-                }
             }
+            }
+            return null;
+    }
+    public ListNode getIntersectionNode(ListNode headA, ListNode headB) {
+        ListNode h1 = headA;
+        ListNode h2 = headB;
+        int h1s = size(headA);
+        int h2s = size(headB);
+        if(h1s>h2s)
+        {
+          ListNode ans =   solver(h1,h2,h1s,h2s);
+            return ans;
         }
         else{
-            int del = h2s-h1s;
-            while(del>0)
-            {
-                h2 = h2.next;
-                del--;
-            }
-            while(h1!=null&&h2!=null)
-            {
-                if(h1==h2)
-                    return h1;
-                else{
-                    h1 = h1.next;
-                    h2 = h2.next;
-                }
-            }            
+           ListNode ans =  solver(h2,h1,h2s,h1s);       
+            return ans;
         }
-        return null;
+
     }
 }
