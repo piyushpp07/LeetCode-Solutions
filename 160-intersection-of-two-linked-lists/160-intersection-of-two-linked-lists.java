@@ -46,12 +46,10 @@ public class Solution {
         int h2s = size(headB);
         if(h1s>h2s)
         {
-          ListNode ans =   solver(h1,h2,h1s,h2s);
-            return ans;
+          return solver(h1,h2,h1s,h2s);
         }
         else{
-           ListNode ans =  solver(h2,h1,h2s,h1s);       
-            return ans;
+        return  solver(h2,h1,h2s,h1s);       
         }
 
     }
