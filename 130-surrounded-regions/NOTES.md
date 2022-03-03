@@ -1,1 +1,1 @@
-​
+In this question we are using a logic that we will traverse through wall if we find a O we will mark it as  a X and will travel all its child and mark them X it means that it is connected to wall and cant be changed whereas if if it is O even if we complete the traversal it means that it is not connected to wall and can be changed to X
