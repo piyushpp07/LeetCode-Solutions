@@ -12,20 +12,26 @@ class Solution
     {
     int low = 0,high = n-1,mid = 0;
     while(mid<=high)
-    {
+    {   int p=0,q=0;
         if(a[mid]==0)
         {
             swap(a[mid++],a[low++]);
+            p = 1;
         }
         else if(a[mid]==1)
         {
             mid++;
+            q=1;
         }
         else if(a[mid]==2)
         {
             swap(a[mid],a[high--]);
+            p=1;
         }
-    }    }
+        if(p==0&&q==0)
+        break;
+     }
+    }
     
 };
 
