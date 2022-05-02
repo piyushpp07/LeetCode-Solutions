@@ -2,7 +2,7 @@ class Solution {
 private:
 	int maxnum = 0;
 	string ans = "";
-	string solve(vector<int>&cost, int target,   unordered_map<int,string>&dp)
+	string solve(vector<int>&cost, int target,map<int,string>&dp)
 	{
 	   if(target<0)
                    return "0";
@@ -24,7 +24,7 @@ private:
 	}
 public:
 	string largestNumber(vector<int>& cost, int target) {
-		  unordered_map<int,string>dp;
+		map<int,string>dp;
 		return solve(cost, target, dp);
 	}
 };
