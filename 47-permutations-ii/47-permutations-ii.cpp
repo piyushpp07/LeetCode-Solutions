@@ -1,12 +1,12 @@
 class Solution
 {
     private:
-        vector<vector < int>> ans;
+        set<vector<int>>s;
     void solve(map<int, int> &mp, int n, vector<int> &v, int d)
     {
         if (v.size() == n)
         {
-            ans.push_back(v);
+            s.insert(v);
         }
         if (mp.size() == 0)
             return;
@@ -34,11 +34,6 @@ class Solution
             int n = nums.size();
             vector<int> v;
             solve(mp, n, v, 0);
-            set<vector<int>>s;
-            for(auto i : ans)
-            {
-                    s.insert(i);
-            }
             vector<vector<int>>ref;
             for(auto i : s)
                     ref.push_back(i);
