@@ -2,22 +2,28 @@ class Solution
 {
     private:
         int parent[1001];
+    int s[1001];
     vector<pair<int, pair<int, int>>> adj;
     void make(int n)
     {
         parent[n] = n;
+        s[n] = 1;
     }
     int find(int a)
     {
         if (a == parent[a]) return a;
-        return find(parent[a]);
+        return parent[a] = find(parent[a]);
     }
     void Union(int a, int b)
     {
         int m = find(a);
         int n = find(b);
-        if(m!=n)
-        parent[m] = n;
+        if (m != n)
+        {   if(s[n]>s[m])
+                swap(n,m);
+            parent[m] = n;
+            s[m]+=s[n];
+        }
     }
     public:
         int minCostConnectPoints(vector<vector < int>> &points)
