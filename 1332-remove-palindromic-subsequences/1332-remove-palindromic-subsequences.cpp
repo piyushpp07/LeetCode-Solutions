@@ -6,8 +6,6 @@ class Solution
         {
             string t = s;
             reverse(s.begin(),s.end());
-            if(t == s)
-                    return 1;
-            return 2;
+            return (t==s)?1:2;
         }
 };
