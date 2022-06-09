@@ -3,7 +3,6 @@ class Solution
     public:
         vector<int> twoSum(vector<int> &numbers, int target)
         {
-            vector<int> v;
             int lo = 0 , hi = numbers.size()-1;
             while(lo<=hi)
             {
@@ -13,7 +12,7 @@ class Solution
                     else if(sum>target) hi--;
                     else lo++;
             }
-            return v;
+            return {};
        
         }
 };
