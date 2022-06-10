@@ -12,13 +12,9 @@ class Solution
                 {
                     if (mp.find(s[j]) != mp.end())
                         break;
-                    else
-                    {
-                        minans++;
-                        mp[s[j]]++;
-                    }
+                    minans++, mp[s[j]]++;
                 }
-                ans = max(ans, minans);
+                ans = ans > minans ? ans : minans;
             }
             return ans;
         }
