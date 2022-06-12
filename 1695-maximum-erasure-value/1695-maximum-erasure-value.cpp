@@ -3,7 +3,7 @@ class Solution
     public:
         int maximumUniqueSubarray(vector<int> &nums)
         {
-            unordered_set<int> seen;
+            set<int> seen;
             int curr_sum = 0, max_sum = 0, l = 0;
             for (auto i: nums)
             {
