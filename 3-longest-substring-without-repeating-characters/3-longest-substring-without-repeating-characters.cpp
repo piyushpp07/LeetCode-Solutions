@@ -3,19 +3,21 @@ class Solution
     public:
         int lengthOfLongestSubstring(string s)
         {
-            int ans = 0;
-            for (int i = 0; i < s.size(); i++)
+            int ans = 0, l = 0, curr_len = 0;
+            set<char> st;
+            for (auto i: s)
             {
-                int minans = 0;
-                map<char, int> mp;
-                for (int j = i; j < s.size(); j++)
+                while (st.find(i) != st.end())
                 {
-                    if (mp.find(s[j]) != mp.end())
-                        break;
-                    minans++, mp[s[j]]++;
+                    curr_len -= 1;
+                    st.erase(s[l]);
+                    l++;
                 }
-                ans = ans > minans ? ans : minans;
+                st.insert(i);
+                curr_len += 1;
+                ans = max(curr_len, ans);
             }
+
             return ans;
         }
 };
