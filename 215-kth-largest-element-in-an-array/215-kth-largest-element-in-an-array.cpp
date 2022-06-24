@@ -1,13 +1,19 @@
-bool comp(int a,int b)
+bool comp(int a, int b)
 {
-        return a>b;
+    return a > b;
 }
 class Solution
 {
     public:
         int findKthLargest(vector<int> &nums, int k)
         {
-            sort(nums.begin(), nums.end(),comp);
-            return nums[k-1];
+            priority_queue<int, vector < int>, greater < int>> pq;
+            for (auto i: nums)
+            {
+                pq.push(i);
+                if (pq.size() > k)
+                    pq.pop();
+            }
+            return pq.top();
         }
 };
