@@ -5,7 +5,7 @@ class Solution
         {
             using ppi = pair<int, int> ;
             priority_queue<ppi, vector < ppi>, greater < ppi>> pq;
-            map<int, int> mp;
+            unordered_map<int, int> mp;
             for (int i = 0; i < nums.size(); i++)
             {
                 mp[nums[i]]++;
