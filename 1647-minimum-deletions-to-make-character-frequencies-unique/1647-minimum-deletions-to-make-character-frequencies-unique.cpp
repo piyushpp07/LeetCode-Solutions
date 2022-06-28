@@ -20,7 +20,6 @@ class Solution
             vector<int> v(26, 0);
             for (auto i: s)
                 v[i - 'a']++;
-            sort(v.begin(), v.end(), comp);
             for (int i = 0; i < 26; i++)
             {
                 int cnt = 0;
