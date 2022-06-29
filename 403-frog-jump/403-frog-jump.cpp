@@ -2,6 +2,10 @@ class Solution
 {
     private:
         int dp[2001][2001];
+    int tr[3] = { -1,
+        0,
+        1
+    };
     bool solve(int i, int p, vector<int> &arr, int n)
     {
         if (i == n - 1) return true;
@@ -12,21 +16,14 @@ class Solution
         for (int k = i + 1; k < n; k++)
         {
             int diff = arr[k] - arr[i];
-            if (p - 1 > 0)
+            for (int m = 0; m < 3; m++)
             {
-                if (diff == p - 1)
+                int jump = tr[m] + p;
+                if (jump > 0)
                 {
-                    int idx = p - 1;
-                    flag = flag || solve(k, p - 1, arr, n);
+                    if (diff == jump)
+                        flag = flag || solve(k, jump, arr, n);
                 }
-            }
-            if (p == diff)
-            {
-                flag = flag || solve(k, p, arr, n);
-            }
-            if (p + 1 == diff)
-            {
-                flag = flag || solve(k, p + 1, arr, n);
             }
         }
         return dp[i][p] = flag;
