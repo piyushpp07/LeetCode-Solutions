@@ -104,7 +104,7 @@ int minimum(int n, int tl, int tr, int l, int r)
 	else {
 		int mid = (tl + tr) / 2;
 		int a = minimum(2 * n, tl, mid, l, min(r, mid));
-		int b = minimum(2 * n + 1, mid + 1, r, max(mid + 1, l), r);
+		int b = minimum(2 * n + 1, mid + 1, tr, max(mid + 1, l), r);
 		return min(a, b);
 	}
 
