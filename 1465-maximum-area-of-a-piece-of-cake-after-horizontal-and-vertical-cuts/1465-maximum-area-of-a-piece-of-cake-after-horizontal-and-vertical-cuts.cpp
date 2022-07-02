@@ -11,21 +11,11 @@ class Solution
             sort(hCuts.begin(), hCuts.end());
             sort(vCuts.begin(), vCuts.end());
 
-            if (hs == 0)
-                hmax = h;
-            else
-            {
-                hmax = hCuts[0];
-                hmax = max(hmax, h - hCuts[hs - 1]);
-            }
+            hmax = hCuts[0];
+            hmax = max(hmax, h - hCuts[hs - 1]);
 
-            if (vs == 0)
-                vmax = w;
-            else
-            {
-                vmax = vCuts[0];
-                vmax = max(vmax, w - vCuts[vs - 1]);
-            }
+            vmax = vCuts[0];
+            vmax = max(vmax, w - vCuts[vs - 1]);
 
             for (int i = 1; i < hs; i++)
                 hmax = max(hmax, hCuts[i] - hCuts[i - 1]);
