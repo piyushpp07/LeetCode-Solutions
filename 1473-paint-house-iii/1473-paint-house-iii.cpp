@@ -24,13 +24,9 @@ class Solution
             for (int i = 0; i < cost[0].size(); i++)
             {
                 if (i + 1 == prev)
-                {
-                    ans = min(ans, cost[idx][i] + solve(idx + 1, prev, houses, cost, target));
-                }
+                    ans = min(ans, cost[idx][i] + solve(idx + 1, prev, houses, cost, target)); 
                 else
-                {
                     ans = min(ans, cost[idx][i] + solve(idx + 1, i + 1, houses, cost, target - 1));
-                }
             }
 
             return dp[idx][prev][target] = ans;
