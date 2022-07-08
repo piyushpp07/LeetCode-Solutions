@@ -10,16 +10,16 @@ class Solution
             }
             if (idx >= houses.size())
                 return INT_MAX;
+
             if (target < 0)
                 return INT_MAX;
-
+            if (dp[idx][prev][target] != -1)
+                return dp[idx][prev][target];
             if (houses[idx] != 0)
             {
                 if (houses[idx] == prev) return solve(idx + 1, prev, houses, cost, target);
                 else return solve(idx + 1, houses[idx], houses, cost, target - 1);
             }
-            if (dp[idx][prev][target] != -1)
-                return dp[idx][prev][target];
             long long ans = INT_MAX;
             for (int i = 0; i < cost[0].size(); i++)
             {
