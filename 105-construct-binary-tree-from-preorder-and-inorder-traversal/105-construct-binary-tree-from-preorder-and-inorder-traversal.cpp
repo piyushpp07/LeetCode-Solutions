@@ -12,21 +12,19 @@
 class Solution
 {
     public:
-        int findPos(vector<int> &arr, int ele)
-        {
-            int n = arr.size();
-            for (int i = 0; i < n; i++)
-                if (arr[i] == ele)
-                    return i;
-            return -1;
-        }
+        map<int, int> mp;
+    void findPos(vector<int> &arr)
+    {
+        for (int i = 0; i < arr.size(); i++)
+            mp[arr[i]] = i;
+    }
     TreeNode* solve(vector<int> &preorder, vector<int> &inorder, int &index, int instart, int inend, int n)
     {
         if (index >= n || instart > inend)
             return NULL;
         int ele = preorder[index++];
         TreeNode *root = new TreeNode(ele);
-        int pos = findPos(inorder, ele);
+        int pos = mp[ele];
 
         root->left = solve(preorder, inorder, index, instart, pos - 1, n);
         root->right = solve(preorder, inorder, index, pos + 1, inend, n);
@@ -36,6 +34,7 @@ class Solution
     {
         int n = preorder.size();
         int index = 0;
+        findPos(inorder);
         return solve(preorder, inorder, index, 0, n - 1, n);
     }
 };
