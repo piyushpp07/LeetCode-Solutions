@@ -10,7 +10,7 @@ class Solution
         0,
         -1
     };
-    int vis[502][502];
+    // logic try to join the connected components with the 0 wala land
     vector<vector < int>> grid;
     public:
 
@@ -24,7 +24,7 @@ class Solution
             {
                 int x = dx[i] + sx;
                 int y = dy[i] + sy;
-                if (x >= 0 && y >= 0 && x < n && y < m && grid[x][y]==1)
+                if (x >= 0 && y >= 0 && x < n && y < m && grid[x][y] == 1)
                 {
 
                     ans += 1 + dfs(x, y, index);
@@ -39,14 +39,13 @@ class Solution
         int n = grid.size();
         int m = grid[0].size();
         int ans = 0;
-        memset(vis, 0, sizeof vis);
         int index = 2;
         unordered_map<int, int> area;
         for (int i = 0; i < n; i++)
         {
             for (int j = 0; j < m; j++)
             {
-                if (grid[i][j]==1)
+                if (grid[i][j] == 1)
                 {
                     int q = 1 + dfs(i, j, index);
                     area[index++] = q;
@@ -54,7 +53,8 @@ class Solution
                 }
             }
         }
-        for (int x = 0; x < n; ++x){
+        for (int x = 0; x < n; ++x)
+        {
             for (int y = 0; y < m; ++y)
                 if (grid[x][y] == 0)
                 {
