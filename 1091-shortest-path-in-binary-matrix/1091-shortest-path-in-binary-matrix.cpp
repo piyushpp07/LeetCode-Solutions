@@ -27,16 +27,19 @@ class Solution
                 return -1;
             else
             {
-                queue<pair<int, int>> q;
-                q.push({ 0,
-                    0 });
-                grid[0][0] = 1;
+                queue<pair<int, pair<int, int>>> q;
+                q.push({ 1,
+                    { 0,
+                        0 } });
+
                 while (!q.empty())
                 {
                     auto t = q.front();
                     q.pop();
-                    int a = t.first;
-                    int b = t.second;
+                    int d = t.first;
+                    int a = t.second.first;
+                    int b = t.second.second;
+                    if (a == n - 1 && b == n - 1) return d;
                     for (int i = 0; i < 8; i++)
                     {
                         int x = a + dx[i];
@@ -44,14 +47,17 @@ class Solution
                         if (x < n && y < n && x >= 0 && y >= 0 && grid[x][y] == 0)
                         {
 
-                            q.push({ x,
-                                y });
-                            grid[x][y] = grid[a][b] + 1;
+                            q.push({ d + 1,
+                                {
+                                    x,
+                                    y
+                                } });
+                            grid[x][y] = 1;
                         }
                     }
                 }
 
-                return grid[n - 1][n - 1] == 0 ? -1 : grid[n - 1][n - 1];
+                return -1;
             }
         }
 };
