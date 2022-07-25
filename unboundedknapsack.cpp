@@ -1,4 +1,4 @@
-//dp no of ways to make given sum
+//dp no of ways to make given sum yup
     long long int count( int c[], int n, int total)
     {
         long int dp[n+1][total+1];
