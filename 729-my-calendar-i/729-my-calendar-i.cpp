@@ -1,7 +1,7 @@
 class MyCalendar
 {
     public:
-        unordered_map<int, int> mp;
+        vector<pair<int, int>> mp;
     MyCalendar() {}
 
     bool book(int start, int end)
@@ -17,7 +17,7 @@ class MyCalendar
         }
         if (ans)
         {
-            mp[start] = end;
+            mp.push_back({start,end});
             return true;
         }
         else return false;
