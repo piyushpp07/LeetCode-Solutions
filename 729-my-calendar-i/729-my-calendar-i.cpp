@@ -1,13 +1,13 @@
 class MyCalendar
 {
     public:
-        map<int, int> mp;
+        unordered_map<int, int> mp;
     MyCalendar() {}
 
     bool book(int start, int end)
     {
         bool ans = true;
-        for (auto i: mp)
+        for (auto &i: mp)
         {
             if(start >= i.second)
                 continue;
