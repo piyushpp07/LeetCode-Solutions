@@ -1,57 +1,51 @@
 class Solution
 {
+
     public:
-        bool isCycle(int node, vector<int> &vis, vector<int> adj[])
+        int dfs(int src, vector<int> &vis, vector<int> adj[])
         {
-            vis[node] = 2;
-
-            for (auto x: adj[node])
+            vis[src] = 2;
+            for (auto i: adj[src])
             {
-                if (!vis[x])
+                if (!vis[i])
                 {
-                    if (isCycle(x, vis, adj)) return true;
+                    if(dfs(i, vis, adj))
+                        return true;
                 }
-                else if (vis[x] == 2) return true;
+                else if (vis[i] == 2)
+                    return 1;
             }
-
-            vis[node] = 1;
-            return false;
+            vis[src] = 1;
+            return 0;
         }
-
     int longestCycle(vector<int> &edges)
     {
-        int n = edges.size();
-        vector<int> adj[n];
-
-        for (int i = 0; i < n; i++)
+        vector<int> adj[edges.size()];
+        for (int i = 0; i < edges.size(); i++)
         {
-            int u = i;
-            int v = edges[i];
-
-            if (v == -1) continue;
-            adj[v].push_back(u);
+            if (edges[i] != -1)
+                adj[edges[i]].push_back(i);	//building the graph in opposite
         }
-
-        int maxi = -1;
-        vector<int> vis(n, 0);
-        for (int i = 0; i < n; i++)
+        int ans = -1;
+        vector<int> vis(edges.size(), 0);
+        for (int i = 0; i < edges.size(); i++)
         {
-            if (vis[i]) continue;
+            if (vis[i])
+                continue;
             if (edges[i] == -1) continue;
-
-            bool temp = isCycle(i, vis, adj);
-
-            if (temp)
+            else
             {
-                int cnt = 1;
-                int curr = i;
-                while (i != edges[curr]) 
-                    curr = edges[curr], cnt++;
+                int temp = dfs(i,vis,adj);
+                if (temp)
+                {
+                    int cnt = 1;
+                    int curr = i;
+                    while (i != edges[curr]) curr = edges[curr], cnt++;
 
-                maxi = max(maxi, cnt);
+                    ans = max(ans, cnt);
+                }
             }
         }
-
-        return maxi;
+        return ans;
     }
 };
