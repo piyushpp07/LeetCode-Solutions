@@ -1,6 +1,6 @@
-bool comp(vector<int> &a, vector<int> &b)
+bool comp(vector<int>&a,vector<int>&b)
 {
-    return a[0] < b[0];
+    return a[0]<b[0];
 }
 class Solution
 {
@@ -14,10 +14,19 @@ class Solution
         else
             return par[a] = find(par[a]);
     }
-
+    void Union(int a, int b)
+    {
+        int l = find(a);
+        int m = find(b);
+        if(l!=m)
+        {
+            par[l] = m;
+            cc++;
+        }
+    }
     int makeConnected(int n, vector<vector < int>> &connections)
     {
-        memset(par, 0, sizeof par);
+        memset(par, 0, sizeof par); 
         for (int i = 0; i < n; i++)
         {
             par[i] = i;
@@ -26,14 +35,9 @@ class Solution
         {
             int a = connections[i][0];
             int b = connections[i][1];
-            a = find(a);
-            b = find(b);
-            if (a != b)
-            {
-                par[a] = b;
-                cc++;
-            }
+            Union(a,b);
         }
-        return connections.size() < n - 1 ? -1 : (n - 1) - cc;
+        return connections.size()<n-1?-1:(n-1)-cc;
+        
     }
 };
