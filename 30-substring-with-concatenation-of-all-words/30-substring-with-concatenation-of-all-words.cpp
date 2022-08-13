@@ -10,9 +10,10 @@ class Solution
                 if (mp.find(q) == mp.end())
                     return false;
                 else
-                {
-                    if (--mp[q] == -1)
+                {  
+                    if (mp[q] == 0)
                         return false;
+                    mp[q]--;
                 }
                 i+=n;
             }
