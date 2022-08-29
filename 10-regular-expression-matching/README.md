@@ -1,4 +1,4 @@
-<h2><a href="https://leetcode.com/problems/regular-expression-matching/">10. Regular Expression Matching</a></h2><h3>Hard</h3><hr><div><p>Given an input string <code>s</code>&nbsp;and a pattern <code>p</code>, implement regular expression matching with support for <code>'.'</code> and <code>'*'</code> where:</p>
+<h2><a href="https://leetcode.com/problems/regular-expression-matching/solution/">10. Regular Expression Matching</a></h2><h3>Hard</h3><hr><div><p>Given an input string <code>s</code>&nbsp;and a pattern <code>p</code>, implement regular expression matching with support for <code>'.'</code> and <code>'*'</code> where:</p>
 
 <ul>
 	<li><code>'.'</code> Matches any single character.​​​​</li>
