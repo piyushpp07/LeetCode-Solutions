@@ -1,8 +1,8 @@
 bool comp(vector<int> &a, vector<int> &b)
 {
-    if (a[0] == b[0])
-        return a[1] > b[1];
-    else return a[0] < b[0];
+    if (a[1] == b[1])
+        return a[0] > b[0];
+    else return a[1] < b[1];
 }
 class Solution
 {
@@ -13,7 +13,7 @@ class Solution
             vector<int>lis;
             for (auto i: env)
             {
-                int ele = i[1];
+                int ele = i[0];
 
                 int idx = lower_bound(lis.begin(), lis.end(), ele) - lis.begin();
 
