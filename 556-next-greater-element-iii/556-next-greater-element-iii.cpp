@@ -13,11 +13,11 @@ class Solution
             if (i == -1)
                 return -1;
             int j = no - 1;
-            while (str[j] <= str[i])
+            while (j>i && str[j] <= str[i])
                 j--;
             swap(str[i], str[j]);
             reverse(str.begin()+i+1, str.end());
-            long l = stol(str);
+            long long int l = stoll(str);
             return l>INT_MAX?-1:l;
         }
 };
