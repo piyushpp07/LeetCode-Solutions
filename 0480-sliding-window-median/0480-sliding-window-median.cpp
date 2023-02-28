@@ -1,36 +1,47 @@
 class Solution {
 public:
-    double median(vector<double>&q, int k)
+    double median(multiset<double>&data, int n)
     {
-        double x;
-        if(k%2 == 0)
-             x=(double)(q[k/2]+q[k/2-1])/2;
+        double median;
+        auto iter = data.cbegin();
+        advance(iter, n / 2);
+
+        // Middle or average of two middle values
+        if (n % 2 == 0)
+        {
+            const auto iter2 = iter--;
+            median = double(*iter + *iter2) / 2;    // data[n/2 - 1] AND data[n/2]
+        }
         else
-             x=(double)q[k/2];
-        return x;
+        {
+            median = *iter;
+        }
+        return median;
     }
     vector<double> medianSlidingWindow(vector<int>& nums, int k) {
         vector<double>v,q;
         int i =0,j =0,n = nums.size();
+        multiset<double>ms;
         for(;j<k;j++)
-            q.push_back(nums[j]);
-        sort(q.begin(),q.end());
+            ms.insert(nums[j]);
+        auto it = ms.begin();
+        for(int p = 0;p<k/2;p++)
+            it++;
         if(n == k)
-            return {median(q,k)};
+            return {median(ms,k)};
         while(j<n)
         {
             if(j-i<k)
             {
-                int ub = upper_bound(q.begin(),q.end(),nums[j])-q.begin();
-                q.insert(q.begin()+ub,nums[j]);
+                ms.insert(nums[j]);
                 j++;
             }
             if(j-i == k)
             {
-                double d = median(q,k);
+                double d = median(ms,k);
                 v.push_back(d);
-                int init_pos = lower_bound(q.begin(), q.end(), nums[i])-q.begin();
-                q.erase(q.begin()+init_pos);
+                auto lb = ms.lower_bound(nums[i]);
+                ms.erase(lb);
                 i++;
             }
         }
