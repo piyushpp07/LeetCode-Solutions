@@ -1,33 +1,54 @@
+class TrieNode{
+public:
+    bool isCompleted ;
+    TrieNode *children[26];
+    TrieNode ()
+    {
+        isCompleted = false;
+        memset(children,0,sizeof children);
+    }
+};
 class Trie {
 public:
-    unordered_map<string,int>mp;
+    TrieNode *root;
     Trie() {
-        
+         root = new TrieNode();
     }
     
     void insert(string word) {
-        mp[word] = 1;
+        TrieNode *node = root;
+        for(char ch : word)
+        {
+            int idx = ch - 'a';
+            if(node->children[idx] == NULL)
+                node->children[idx] = new TrieNode();
+            node = node->children[idx];
+        }
+        node->isCompleted = true;
     }
     
     bool search(string word) {
-        if(mp.find(word)!=mp.end())
-            return true;
-        return false;
+        TrieNode *node  = root;
+        for(char ch:word)
+        {
+            int idx = ch - 'a';
+            if(node -> children[idx] == NULL)
+                return false;
+            node=node->children[idx];
+        }
+        return node->isCompleted;
     }
     
     bool startsWith(string prefix) {
-
-        for(auto j : mp)
+        TrieNode *node  = root;
+        for(char ch:prefix)
         {
-            if(j.first.size() >= prefix.size())
-            {
-               string s = j.first.substr(0,prefix.size());
-               
-               if(s == prefix)
-                   return true;
-            }
+            int idx = ch - 'a';
+            if(node -> children[idx] == NULL)
+                return false;
+            node=node->children[idx];
         }
-        return false;
+        return true;
     }
 };
 
