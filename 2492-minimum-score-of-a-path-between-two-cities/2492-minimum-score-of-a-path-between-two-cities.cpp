@@ -1,45 +1,62 @@
-class Solution {
-public:
-    int vis[100001];
-    void dfs(int node,vector<int>adj[],vector<int>&ans)
-    {
-        vis[node] = 1;
-        for(auto curr : adj[node])
+class dsu{
+    public:
+        vector<int> parent;
+        vector<int> size;
+        dsu(int n)
         {
-            if(!vis[curr])
+            parent.assign(n,-1);
+            size.assign(n,0);
+        }
+        void make_set(int v)
+        {
+            parent[v]=v;
+            size[v]=1;
+        }
+        int find_parent(int v)
+        {
+            if(v==parent[v])    return v;
+            return parent[v]=find_parent(parent[v]);
+        }
+        void union_set(int x,int y)
+        {
+            x=find_parent(x);
+            y=find_parent(y);
+            if(x!=y)
             {
-                ans.push_back(curr);
-                dfs(curr,adj,ans);
+                if(size[x]<size[y]) swap(x,y);
+                parent[y]=x;
+                size[x]+=size[y];
             }
         }
-    }
+};
+class Solution {
+public:
+
     int minScore(int n, vector<vector<int>>& roads) {
-        vector<int>adj[n+1];
-        map<int,int>mp;
-        for(int i =0 ;i<roads.size();i++)
+        dsu _dsu(n+1);
+        for(int i =1;i<=n;i++)
+            _dsu.make_set(i);
+        int ans = INT_MAX;
+        vector<pair<int,int>>v;
+        for(int i =0;i<roads.size();i++)
         {
-            int src = roads[i][0];
-            int des = roads[i][1];
+            int x = roads[i][0];
+            int y = roads[i][1];
             int cost = roads[i][2];
-            adj[src].push_back(des);
-            adj[des].push_back(src);
-            if(mp.find(src)!=mp.end())
-            mp[src] = min(mp[src],cost);
-            else mp[src] = cost;
+            v.push_back({x,y});
+            _dsu.union_set(x,y);
         }
-       
-        vector<int>ans;
-        ans.push_back(1);
-        memset(vis,0,sizeof vis);
-        dfs(1,adj,ans);
-        int cnt = INT_MAX;
-        
-        for(auto i : ans)
+        int par1 = _dsu.find_parent(1);
+              for(int i =0;i<roads.size();i++)
         {
-            if(mp.find(i)!=mp.end())
-            cnt = min(cnt,mp[i]);
+            int x = roads[i][0];
+            int y = roads[i][1];
+            int cost = roads[i][2];
+            if(_dsu.find_parent(x) == par1)
+            {
+                ans = min(ans,cost);
+            }
         }
-        
-        return cnt;
+        return ans;
     }
 };
