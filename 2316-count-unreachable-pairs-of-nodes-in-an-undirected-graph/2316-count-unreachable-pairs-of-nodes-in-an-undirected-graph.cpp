@@ -1,43 +1,64 @@
 using lli = long long int;
+
+class dsu{
+    public:
+        vector<int> parent;
+        vector<int> size;
+        dsu(int n)
+        {
+            parent.assign(n,-1);
+            size.assign(n,0);
+        }
+        void make_set(int v)
+        {
+            parent[v]=v;
+            size[v]=1;
+        }
+        int find_parent(int v)
+        {
+            if(v==parent[v])    return v;
+            return parent[v]=find_parent(parent[v]);
+        }
+        void union_set(int x,int y)
+        {
+            x=find_parent(x);
+            y=find_parent(y);
+            if(x!=y)
+            {
+                if(size[x]<size[y]) swap(x,y);
+                parent[y]=x;
+                size[x]+=size[y];
+                size[y] = 0;
+            }
+        }
+};
+
 class Solution {
 public:
-    lli dfs(int node,vector<int>&vis,vector<int>adj[])
-    {
-        vis[node] = 1;
-        lli tot = 0;
-        for(auto i : adj[node]){
-            if(!vis[i])
-            {
-                tot += dfs(i,vis,adj);
-            }
-        }
-        return tot+1;
-    }
+   
     long long countPairs(int n, vector<vector<int>>& edges) {
-        lli ans = 0;
-        vector<int>adj[n];
-        for(int i =0;i < edges.size();i++)
-        {
-            int x = edges[i][0];
-            int y = edges[i][1];
-            adj[x].push_back(y);
-            adj[y].push_back(x);
-        }
-        lli tot = 0;
-        map<lli,lli>mp;
-        vector<int>vis(n,0);
+        dsu _dsu(n);
         for(int i = 0;i<n;i++)
         {
-            if(!vis[i]){
-                lli curr = dfs(i,vis,adj);
-                tot+=curr;
-                mp[i] = curr;
-            }
+            _dsu.make_set(i);
         }
-        for(auto i : mp )
+        for(auto i : edges)
         {
-            ans += (tot - i.second) * i.second;
+            int x = i[0];
+            int y = i[1];
+            _dsu.union_set(x,y);
+        }
+        lli ans = 0,tot = 0;
+        for(auto i : _dsu.size )
+        {
+            tot += i;
+        }
+        for(auto i : _dsu.size )
+        {
+            if(i>0)
+            ans += (tot - i)*(i);
         }
         return ans/2;
     }
+    
 };
