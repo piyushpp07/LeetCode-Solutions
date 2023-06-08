@@ -8,13 +8,16 @@ public:
         int cnt = 0;
         while(j<m)
         {
-           while( i >= 0 && grid[j][i] < 0) 
+           if( i >= 0 && grid[j][i] < 0) 
            {
                cnt++;
                i--;
            }
-            j++;
-            i = n;
+            else{
+              j++;
+              i = n;
+            }
+
         }
         return cnt;
     }
