@@ -1,18 +1,9 @@
 class Solution {
 public:
     char nextGreatestLetter(vector<char>& letters, char target) {
-        char ans = 'z';
-        bool flag = false;
-        for(auto i : letters)
-        {
-            if(i > target && i <= ans)
-            {
-                ans = i;
-                flag = true;
-            }
-        }
-        if(flag )
-            return ans;
+         int idx = upper_bound(letters.begin(),letters.end(),target) - letters.begin();
+         if(idx != letters.size())
+             return letters[idx];
         return letters[0];
     }
 };
